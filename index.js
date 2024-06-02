@@ -9,8 +9,13 @@ const userSchema = require("./schame");
 const app = express();
 app.use(express.json()) ;
  
-app.get("/", (req, res) => {
-    res.send("Hello World")
+app.get("/", async(req, res) => {
+   try {
+      const user = await userSchema.find() ;
+      res.send(user) ;
+   } catch (error) {
+    res.send(error) ;
+   }
 })
 
 app.post("/post" , async (req , res)=>{
